@@ -1,0 +1,8 @@
+redirects: on
+source https://nuget.org/api/v2
+
+nuget EventStore.Client
+nuget FsPickler.Json
+nuget ExtCore
+nuget ExtCore
+nuget Microsoft.Owin
