@@ -21,7 +21,7 @@ let info =
     "project-author", "exira"
     "project-summary", "Exira.EventStore is an F# implementation for EventStore (https://geteventstore.com/)"
     "project-github", githubLink
-    "project-nuget", "http://nuget.org/packages/ges" ]
+    "project-nuget", "http://nuget.org/packages/Exira.EventStore" ]
 
 // --------------------------------------------------------------------------------------
 // For typical project, no changes are needed below
