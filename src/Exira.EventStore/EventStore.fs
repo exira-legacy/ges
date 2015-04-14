@@ -6,35 +6,7 @@ module EventStore =
     open EventStore.ClientAPI
     open EventStore.ClientAPI.SystemData
 
-    open AsyncExtensions
     open Serialization
-
-    type private IEventStoreConnection with
-        member this.AsyncConnect() =
-            Async.AwaitTask(this.ConnectAsync())
-
-        member this.AsyncReadEvent stream eventNumber resolveLinkTos =
-            let (StreamId streamId) = stream
-            Async.AwaitTask(this.ReadEventAsync(streamId, eventNumber, resolveLinkTos))
-
-        member this.AsyncReadStreamEventsForward stream start count resolveLinkTos =
-            let (StreamId streamId) = stream
-            Async.AwaitTask(this.ReadStreamEventsForwardAsync(streamId, start, count, resolveLinkTos))
-
-        member this.AsyncAppendToStream stream expectedVersion events =
-            let (StreamId streamId) = stream
-            Async.AwaitTask(this.AppendToStreamAsync(streamId, expectedVersion, events))
-
-        member this.AsyncSubscribeToAll resolveLinkTos eventAppeared =
-            Async.AwaitTask(this.SubscribeToAllAsync(resolveLinkTos, eventAppeared))
-
-        member this.AsyncGetStreamMetadata stream =
-            let (StreamId streamId) = stream
-            Async.AwaitTask(this.GetStreamMetadataAsync(streamId))
-
-        member this.AsyncSetStreamMetadata stream expectedMetastreamVersion (metadata: StreamMetadata) =
-            let (StreamId streamId) = stream
-            Async.AwaitTask(this.SetStreamMetadataAsync(streamId, expectedMetastreamVersion, metadata))
 
     type InternalEvent =
         | LastCheckPoint of LastCheckPointEvent
@@ -127,3 +99,11 @@ module EventStore =
                         | false -> AllCheckpoint.AllStart
                     | _ -> AllCheckpoint.AllStart
         }
+
+    let subscribeToAllFrom (store: IEventStoreConnection) lastPosition resolveLinkTos eventAppeared liveProcessingStarted subscriptionDropped =
+        store.SubscribeToAllFrom(
+            lastCheckpoint = lastPosition,
+            resolveLinkTos = resolveLinkTos,
+            eventAppeared = Action<EventStoreCatchUpSubscription, ResolvedEvent>(eventAppeared),
+            liveProcessingStarted = Action<EventStoreCatchUpSubscription>(liveProcessingStarted),
+            subscriptionDropped = Action<EventStoreCatchUpSubscription, SubscriptionDropReason, Exception>(subscriptionDropped))

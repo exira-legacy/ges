@@ -61,6 +61,7 @@
     <Compile Include="Types.fsi" />
     <Compile Include="Types.fs" />
     <Compile Include="AsyncExtensions.fs" />
+    <Compile Include="EventStoreConnectionExtensions.fs" />
     <Compile Include="Serialization.fs" />
     <Compile Include="EventStore.fs" />
     <Compile Include="AssemblyInfo.fs" />
