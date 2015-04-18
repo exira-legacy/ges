@@ -1,3 +1,6 @@
+#### 0.0.5 - April 19 2015
+* Target .NET Framework 4.5
+
 #### 0.0.4 - April 18 2015
 * Depend on FSharp.Core nuget packages
 
