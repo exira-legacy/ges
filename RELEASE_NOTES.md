@@ -1,3 +1,6 @@
+#### 0.0.4 - April 18 2015
+* Depend on FSharp.Core nuget packages
+
 #### 0.0.3 - April 18 2015
 * Added reference to FsCQRSShop License as inspiration
 
