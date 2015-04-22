@@ -6,7 +6,7 @@
 // Binaries that have XML documentation (in a corresponding generated XML file)
 // Any binary output / copied to bin/projectName/projectName.dll will
 // automatically be added as a binary to generate API docs for.
-// for binaries output to root bin folder please add the filename only to the 
+// for binaries output to root bin folder please add the filename only to the
 // referenceBinaries list below in order to generate documentation for the binaries.
 // (This is the original behaviour of ProjectScaffold prior to multi project support)
 let referenceBinaries = []
@@ -71,7 +71,7 @@ subDirectories (directoryInfo templates)
 let copyFiles () =
   CopyRecursive files output true |> Log "Copying file: "
   ensureDirectory (output @@ "content")
-  CopyRecursive (formatting @@ "styles") (output @@ "content") true 
+  CopyRecursive (formatting @@ "styles") (output @@ "content") true
     |> Log "Copying styles and scripts: "
 
 let references =
@@ -92,12 +92,12 @@ let references =
   else None
 
 let binaries =
-    let manuallyAdded = 
-        referenceBinaries 
+    let manuallyAdded =
+        referenceBinaries
         |> List.map (fun b -> bin @@ b)
-    
-    let conventionBased = 
-        directoryInfo bin 
+
+    let conventionBased =
+        directoryInfo bin
         |> subDirectories
         |> Array.map (fun d -> d.FullName @@ (sprintf "%s.dll" d.Name))
         |> List.ofArray
@@ -106,7 +106,7 @@ let binaries =
 
 let libDirs =
     let conventionBasedbinDirs =
-        directoryInfo bin 
+        directoryInfo bin
         |> subDirectories
         |> Array.map (fun d -> d.FullName)
         |> List.ofArray

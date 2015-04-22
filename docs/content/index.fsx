@@ -18,7 +18,6 @@ ges [![Travis build status](https://travis-ci.org/exira/ges.png)](https://travis
   <div class="span1"></div>
 </div>
 
-
 Contributing and copyright
 --------------------------
 

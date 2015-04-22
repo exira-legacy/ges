@@ -1,10 +1,10 @@
 type project
 owners
     exira
-authors 
+authors
     exira
 projectUrl
-    http://github.com/exira/ges
+    http://git.exira.com/ges/
 iconUrl
     https://raw.githubusercontent.com/exira/ges/master/docs/files/img/logo.png
 licenseUrl

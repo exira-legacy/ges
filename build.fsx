@@ -103,7 +103,7 @@ Target "AssemblyInfo" (fun _ ->
 )
 
 // Copies binaries from default VS location to exepcted bin folder
-// But keeps a subdirectory structure for each project in the 
+// But keeps a subdirectory structure for each project in the
 // src folder to support multiple project outputs
 Target "CopyBinaries" (fun _ ->
     !! "src/**/*.??proj"
