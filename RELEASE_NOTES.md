@@ -1,5 +1,6 @@
 #### 0.0.6 - May 21 2015
 * Add toStreamId
+* Update dependencies
 
 #### 0.0.5 - April 19 2015
 * Target .NET Framework 4.5
