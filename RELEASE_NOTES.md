@@ -1,3 +1,6 @@
+#### 0.0.6 - May 21 2015
+* Add toStreamId
+
 #### 0.0.5 - April 19 2015
 * Target .NET Framework 4.5
 
@@ -5,7 +8,7 @@
 * Depend on FSharp.Core nuget packages
 
 #### 0.0.3 - April 18 2015
-* Added reference to FsCQRSShop License as inspiration
+* Add reference to FsCQRSShop License as inspiration
 
 #### 0.0.2 - April 13 2015
 * Add subscribeToAllFrom

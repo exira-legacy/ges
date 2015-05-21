@@ -16,6 +16,8 @@ module EventStore =
         LastPreparePosition: int64
     }
 
+    let toStreamId prefix (id: Guid) = sprintf "%s-%O" prefix id |> StreamId
+
     let connect configuration =
         async {
             let port = configuration.Port |> ServerPort.value
