@@ -9,7 +9,7 @@ nuget NUnit.Runners
 nuget FAKE
 nuget SourceLink.Fake
 nuget EventStore.Client
-nuget FsPickler.Json 1.0.19
+nuget FsPickler.Json
 nuget ExtCore
 nuget Microsoft.Owin
 

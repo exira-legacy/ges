@@ -17,6 +17,5 @@ module Serialization =
 
     let deserialize<'a> (event: ResolvedEvent) =
         let serializedString = Encoding.UTF8.GetString event.Event.Data
-        let serializedType = typedefof<'a>
-        let event = json.UnPickleOfString(valueType = serializedType, pickle = serializedString)
-        event :?> 'a
+        let event : 'a = json.UnPickleOfString<'a>(pickle = serializedString)
+        event

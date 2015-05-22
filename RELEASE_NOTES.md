@@ -1,3 +1,6 @@
+#### 0.0.7 - May 22 2015
+* Update FsPickler to 1.2.x
+
 #### 0.0.6 - May 21 2015
 * Add toStreamId
 * Update dependencies
