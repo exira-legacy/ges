@@ -22,14 +22,18 @@ module EventStore =
         async {
             let port = configuration.Port |> ServerPort.value
             let endpoint = IPEndPoint(configuration.Address, port)
-            let esSettings =
+            let standardEsSettings =
                 ConnectionSettings
                     .Create()
                     .UseConsoleLogger()
                     .SetDefaultUserCredentials(UserCredentials(configuration.Username, configuration.Password))
                     .KeepReconnecting()
                     .KeepRetrying()
-                    .Build()
+
+            let esSettings =
+                match configuration.UseSsl with
+                | true -> standardEsSettings.UseSslConnection(configuration.TargetHost, true).Build()
+                | false -> standardEsSettings.Build()
 
             let connection = EventStoreConnection.Create(esSettings, endpoint, null)
             do! connection.AsyncConnect()

@@ -1,3 +1,6 @@
+#### 0.0.8 - July 04 2015
+* Added SSL configuration
+
 #### 0.0.7 - May 22 2015
 * Update FsPickler to 1.2.x
 

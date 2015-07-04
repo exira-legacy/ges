@@ -29,6 +29,8 @@ type Configuration = {
     Port: ServerPort.T
     Username: string
     Password: string
+    UseSsl: bool
+    TargetHost: string
 }
 
 // TODO: Not sure if there is a max streamid length?
