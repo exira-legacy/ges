@@ -1,3 +1,6 @@
+#### 0.0.9 - July 04 2015
+* Update references
+
 #### 0.0.8 - July 04 2015
 * Added SSL configuration
 
