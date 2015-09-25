@@ -78,15 +78,16 @@
             appendToStream (...)
           </code>
           <div class="tip" id="1">
-            <strong>Signature:</strong> store:IEventStoreConnection -&gt; stream:StreamId -&gt; expectedVersion:int -&gt; newEvents:&#39;?6152 list -&gt; Async&lt;unit&gt;<br />
-                          <strong>Type parameters:</strong> '?6152          </div>
+            <strong>Signature:</strong> store:IEventStoreConnection -&gt; stream:StreamId -&gt; expectedVersion:int -&gt; events:&#39;?6605 list -&gt; Async&lt;unit&gt;<br />
+                          <strong>Type parameters:</strong> '?6605          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L61-61" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L64-64" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Appends <code>events</code> asynchronously to a <code>stream</code>.</p>
+
         </td>
       </tr>
       <tr>
@@ -100,11 +101,12 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L21-21" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L22-22" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Connects asynchronously to a destination</p>
+
         </td>
       </tr>
       <tr>
@@ -118,7 +120,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L90-90" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L93-93" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -136,7 +138,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L71-71" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L74-74" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -154,11 +156,12 @@
                           <strong>Type parameters:</strong> 'a          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L43-43" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L45-45" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Reads <code>count</code> events from a <code>stream</code> forwards (e.g. oldest to newest) starting from position <code>version</code></p>
+
         </td>
       </tr>
       <tr>
@@ -172,7 +175,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L83-83" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L86-86" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -190,11 +193,16 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L109-109" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L117-117" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Subscribes to a all events. Existing events from <code>lastPosition</code> onwards are read from the Event Store and presented to the user as if they had been pushed.
+Once the end of the stream is read the subscription is transparently (to the user) switched to push new events as they are written.
+The action <code>liveProcessingStarted</code> is called when the subscription switches from the reading phase to the live subscription phase.
+To receive all events in the database, use AllCheckpoint.AllStart. If events have already been received and resubscription from the same point is desired, use the position representing the last event processed which appeared on the subscription.
+NOTE: Using Position.Start here will result in missing the first event in the stream.</p>
+
         </td>
       </tr>
       <tr>
