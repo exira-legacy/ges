@@ -3,3 +3,7 @@
 ## Exira.EventStore
 
 Exira.EventStore is an F# implementation for EventStore (https://geteventstore.com/)
+
+### Cloning
+
+```git clone git@github.com:exira/ges.git -c core.autocrlf=input```
