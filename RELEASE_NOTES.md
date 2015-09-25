@@ -1,3 +1,7 @@
+#### 0.0.10 - September 25 2015
+* Update references
+* Using F# 4.0
+
 #### 0.0.9 - July 04 2015
 * Update references
 

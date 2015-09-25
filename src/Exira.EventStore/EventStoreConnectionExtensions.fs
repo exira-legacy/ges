@@ -3,7 +3,6 @@
 [<AutoOpen>]
 module internal EventStoreConnectionExtensions =
     open EventStore.ClientAPI
-    open AsyncExtensions
 
     type private IEventStoreConnection with
         member this.AsyncConnect() =

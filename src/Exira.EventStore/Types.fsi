@@ -18,6 +18,7 @@ module ServerPort =
     // unwrap directly
     val value: e: T -> int
 
+/// EventStore connection configuration.
 type Configuration = {
     Address: IPAddress
     Port: ServerPort.T
@@ -27,4 +28,5 @@ type Configuration = {
     TargetHost: string
 }
 
+/// Unique id of a stream.
 type StreamId = StreamId of string

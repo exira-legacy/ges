@@ -16,8 +16,10 @@ module EventStore =
         LastPreparePosition: int64
     }
 
+    /// Construct a `StreamId` based on a `prefix` and a `Guid`.
     let toStreamId prefix (id: Guid) = sprintf "%s-%O" prefix id |> StreamId
 
+    /// Connects asynchronously to a destination.
     let connect configuration =
         async {
             let port = configuration.Port |> ServerPort.value
@@ -40,6 +42,7 @@ module EventStore =
             return connection
         }
 
+    /// Reads `count` events from a `stream` forwards (e.g. oldest to newest) starting from position `version`.
     let readFromStream (store: IEventStoreConnection) stream version count =
         async {
             let! slice = store.AsyncReadStreamEventsForward stream version count true
@@ -58,16 +61,18 @@ module EventStore =
             return events, slice.LastEventNumber, nextEventNumber
         }
 
-    let appendToStream (store: IEventStoreConnection) stream expectedVersion newEvents =
+    /// Appends `events` asynchronously to a `stream`.
+    let appendToStream (store: IEventStoreConnection) stream expectedVersion events =
         async {
             let serializedEvents =
-                newEvents
+                events
                 |> List.map serialize
                 |> List.toArray
 
             do! store.AsyncAppendToStream stream expectedVersion serializedEvents |> Async.Ignore
         }
 
+    /// Initialize a new checkpoint `stream` which holds exactly 1 event.
     let initalizeCheckpoint (store: IEventStoreConnection) stream =
         async {
             let! lastMetaData = store.AsyncGetStreamMetadata stream
@@ -80,6 +85,7 @@ module EventStore =
             do! store.AsyncSetStreamMetadata stream ExpectedVersion.Any metadata |> Async.Ignore
         }
 
+    /// Store a checkpoint `position` to the checkpoint `stream`.
     let storeCheckpoint (store: IEventStoreConnection) stream (position: Position) =
         async {
             let checkpoint = LastCheckPoint ({ LastCommitPosition = position.CommitPosition; LastPreparePosition = position.PreparePosition })
@@ -87,6 +93,7 @@ module EventStore =
             do! appendToStream store stream ExpectedVersion.Any [checkpoint]
         }
 
+    /// Retrieve a checkpoint position from a checkpoint `stream`.
     let getCheckpoint (store: IEventStoreConnection) stream =
         async {
             let buildCheckpoint event =
@@ -106,6 +113,11 @@ module EventStore =
                     | _ -> AllCheckpoint.AllStart
         }
 
+    /// Subscribes to a all events. Existing events from `lastPosition` onwards are read from the Event Store and presented to the user as if they had been pushed.
+    /// Once the end of the stream is read the subscription is transparently (to the user) switched to push new events as they are written.
+    /// The action `liveProcessingStarted` is called when the subscription switches from the reading phase to the live subscription phase.
+    /// To receive all events in the database, use AllCheckpoint.AllStart. If events have already been received and resubscription from the same point is desired, use the position representing the last event processed which appeared on the subscription.
+    /// NOTE: Using Position.Start here will result in missing the first event in the stream.
     let subscribeToAllFrom (store: IEventStoreConnection) lastPosition resolveLinkTos eventAppeared liveProcessingStarted subscriptionDropped =
         store.SubscribeToAllFrom(
             lastCheckpoint = lastPosition,

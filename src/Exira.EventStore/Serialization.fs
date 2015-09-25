@@ -7,7 +7,7 @@ module Serialization =
     open Microsoft.FSharp.Reflection
     open Nessos.FsPickler.Json
 
-    let private json = FsPickler.CreateJson(indent = false)
+    let private json = FsPickler.CreateJsonSerializer(indent = false)
 
     let internal serialize (event: 'a) =
         let serializedEvent = json.PickleToString event
