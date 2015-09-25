@@ -1,12 +1,15 @@
+#### 0.0.11 - September 26 2015
+* Target .NET Framework 4.6
+
 #### 0.0.10 - September 25 2015
 * Update references
-* Using F# 4.0
+* Use F# 4.0
 
 #### 0.0.9 - July 04 2015
 * Update references
 
 #### 0.0.8 - July 04 2015
-* Added SSL configuration
+* Add SSL configuration
 
 #### 0.0.7 - May 22 2015
 * Update FsPickler to 1.2.x

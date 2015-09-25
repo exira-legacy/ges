@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>ges</RootNamespace>
     <AssemblyName>Exira.EventStore</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <Name>Exira.EventStore</Name>
     <TargetFrameworkProfile />
   </PropertyGroup>
