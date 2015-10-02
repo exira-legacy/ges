@@ -4,8 +4,8 @@ NUGET
   specs:
     EventStore.Client (3.2.1)
     ExtCore (0.8.45)
-    FAKE (4.4.4)
-    FSharp.Compiler.Service (1.4.0.5)
+    FAKE (4.4.5)
+    FSharp.Compiler.Service (1.4.0.6)
     FSharp.Core (4.0.0.1)
     FSharp.Formatting (2.8.0)
       FSharp.Compiler.Service (>= 0.0.86)
@@ -34,5 +34,5 @@ NUGET
 GITHUB
   remote: fsharp/FAKE
   specs:
-    modules/Octokit/Octokit.fsx (448a0e59aa1381714d045bf81c3ab5692aad6259)
+    modules/Octokit/Octokit.fsx (80516864689fcf46ed484d6ba2fcd8a32cfd8ac5)
       Octokit
