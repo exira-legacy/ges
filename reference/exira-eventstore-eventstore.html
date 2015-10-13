@@ -37,6 +37,9 @@
 
 
 <h1>EventStore</h1>
+<p>
+  <span>Namespace: Exira.EventStore</span><br />
+</p>
 <div class="xmldoc">
 </div>
 
@@ -78,8 +81,8 @@
             appendToStream (...)
           </code>
           <div class="tip" id="1">
-            <strong>Signature:</strong> store:IEventStoreConnection -&gt; stream:StreamId -&gt; expectedVersion:int -&gt; events:&#39;?6156 list -&gt; Async&lt;unit&gt;<br />
-                          <strong>Type parameters:</strong> '?6156          </div>
+            <strong>Signature:</strong> store:IEventStoreConnection -&gt; stream:StreamId -&gt; expectedVersion:int -&gt; events:&#39;?7847 list -&gt; Async&lt;unit&gt;<br />
+                          <strong>Type parameters:</strong> '?7847          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L50-50" class="github-link">
@@ -87,6 +90,8 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Appends <code>events</code> asynchronously to a <code>stream</code>.</p>
+
+
 
         </td>
       </tr>
@@ -107,6 +112,8 @@
             </a>
           <p>Connects asynchronously to a destination.</p>
 
+
+
         </td>
       </tr>
       <tr>
@@ -125,6 +132,8 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Retrieve a checkpoint position from a checkpoint <code>stream</code>.</p>
+
+
 
         </td>
       </tr>
@@ -145,6 +154,8 @@
             </a>
           <p>Initialize a new checkpoint <code>stream</code> which holds exactly 1 event.</p>
 
+
+
         </td>
       </tr>
       <tr>
@@ -164,6 +175,8 @@
             </a>
           <p>Reads <code>count</code> events from a <code>stream</code> forwards (e.g. oldest to newest) starting from position <code>version</code>.</p>
 
+
+
         </td>
       </tr>
       <tr>
@@ -182,6 +195,8 @@
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Store a checkpoint <code>position</code> to the checkpoint <code>stream</code>.</p>
+
+
 
         </td>
       </tr>
@@ -206,6 +221,8 @@ The action <code>liveProcessingStarted</code> is called when the subscription sw
 To receive all events in the database, use AllCheckpoint.AllStart. If events have already been received and resubscription from the same point is desired, use the position representing the last event processed which appeared on the subscription.
 NOTE: Using Position.Start here will result in missing the first event in the stream.</p>
 
+
+
         </td>
       </tr>
       <tr>
@@ -215,8 +232,8 @@ NOTE: Using Position.Start here will result in missing the first event in the st
             toStreamId prefix id
           </code>
           <div class="tip" id="8">
-            <strong>Signature:</strong> prefix:string -&gt; id:&#39;?6151 -&gt; StreamId<br />
-                          <strong>Type parameters:</strong> '?6151          </div>
+            <strong>Signature:</strong> prefix:string -&gt; id:&#39;?7842 -&gt; StreamId<br />
+                          <strong>Type parameters:</strong> '?7842          </div>
         </td>
         <td class="xmldoc">
             <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L20-20" class="github-link">
@@ -224,6 +241,8 @@ NOTE: Using Position.Start here will result in missing the first event in the st
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Construct a <code>StreamId</code> based on a <code>prefix</code> and a value.</p>
+
+
 
         </td>
       </tr>
