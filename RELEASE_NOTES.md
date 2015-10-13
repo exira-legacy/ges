@@ -1,3 +1,7 @@
+#### 0.2 - October 13 2015
+* Update references
+* Moving to connection strings
+
 #### 0.1 - October 2 2015
 * Switch everything over to our TeamCity/Octopus Deploy infrastructure
 

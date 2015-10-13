@@ -16,28 +16,13 @@ module EventStore =
         LastPreparePosition: int64
     }
 
-    /// Construct a `StreamId` based on a `prefix` and a `Guid`.
-    let toStreamId prefix (id: Guid) = sprintf "%s-%O" prefix id |> StreamId
+    /// Construct a `StreamId` based on a `prefix` and a value.
+    let toStreamId prefix id = sprintf "%s-%O" prefix id |> StreamId
 
     /// Connects asynchronously to a destination.
-    let connect configuration =
+    let connect (connectionString: string) =
         async {
-            let port = configuration.Port |> ServerPort.value
-            let endpoint = IPEndPoint(configuration.Address, port)
-            let standardEsSettings =
-                ConnectionSettings
-                    .Create()
-                    .UseConsoleLogger()
-                    .SetDefaultUserCredentials(UserCredentials(configuration.Username, configuration.Password))
-                    .KeepReconnecting()
-                    .KeepRetrying()
-
-            let esSettings =
-                match configuration.UseSsl with
-                | true -> standardEsSettings.UseSslConnection(configuration.TargetHost, true).Build()
-                | false -> standardEsSettings.Build()
-
-            let connection = EventStoreConnection.Create(esSettings, endpoint, null)
+            let connection = EventStoreConnection.Create(connectionString)
             do! connection.AsyncConnect()
             return connection
         }

@@ -57,7 +57,6 @@
   -->
   <Import Project="..\..\.paket\paket.targets" />
   <ItemGroup>
-    <Compile Include="Types.fsi" />
     <Compile Include="Types.fs" />
     <Compile Include="EventStoreConnectionExtensions.fs" />
     <Compile Include="Serialization.fs" />
