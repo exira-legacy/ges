@@ -6,7 +6,7 @@ open System.Reflection
 [<assembly: AssemblyDescriptionAttribute("Exira.EventStore is an F# implementation for EventStore (https://geteventstore.com/)")>]
 [<assembly: AssemblyVersionAttribute("0.2.0")>]
 [<assembly: AssemblyFileVersionAttribute("0.2.0")>]
-[<assembly: AssemblyMetadataAttribute("githash","db29786b65d2c9b8092bfaa919110ec8c64b8623")>]
+[<assembly: AssemblyMetadataAttribute("githash","ca747a75b544259b714af65cf6535b776360296a")>]
 do ()
 
 module internal AssemblyVersionInformation =
