@@ -4,10 +4,10 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("Exira.EventStore")>]
 [<assembly: AssemblyProductAttribute("Exira.EventStore")>]
 [<assembly: AssemblyDescriptionAttribute("Exira.EventStore is an F# implementation for EventStore (https://geteventstore.com/)")>]
-[<assembly: AssemblyVersionAttribute("0.1.2")>]
-[<assembly: AssemblyFileVersionAttribute("0.1.2")>]
-[<assembly: AssemblyMetadataAttribute("githash","09b15d1ac42cd7f3494c7ef288884313fcb4a85e")>]
+[<assembly: AssemblyVersionAttribute("0.2.3")>]
+[<assembly: AssemblyFileVersionAttribute("0.2.3")>]
+[<assembly: AssemblyMetadataAttribute("githash","8dfa4f1130f8df166c7a3d897e5ff651745a96a7")>]
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] Version = "0.1.2"
+    let [<Literal>] Version = "0.2.3"
