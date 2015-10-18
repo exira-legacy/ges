@@ -1,3 +1,7 @@
+#### 0.3 - October 18 2015
+* Using Seq instead of list since F# 4.0
+* Add readAllFromStream to read using slices per 4096 events (breaking change in EventStore 3.2.0)
+
 #### 0.2 - October 13 2015
 * Update references
 * Moving to connection strings

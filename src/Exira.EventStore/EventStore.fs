@@ -5,6 +5,7 @@ module EventStore =
     open System.Net
     open EventStore.ClientAPI
     open EventStore.ClientAPI.SystemData
+    open ExtCore.Collections.AsyncSeqExtensions
 
     open Serialization
 
@@ -27,16 +28,48 @@ module EventStore =
             return connection
         }
 
+    // Reads all events from a `stream` forwards (e.g. oldest to newest) starting from position `version`.
+    let readAllFromStream (store: IEventStoreConnection) stream version =
+        let rec readAllSlices (store: IEventStoreConnection) stream version =
+            asyncSeq {
+                let size = 4096
+                let! slice = store.AsyncReadStreamEventsForward stream version size true
+
+                if (slice.IsEndOfStream) then
+                    yield slice
+                else
+                    yield slice
+                    yield! readAllSlices store stream (version + size)
+            }
+
+        let parseEvents (slice: StreamEventsSlice) =
+            let events: AsyncSeq<'a> =
+                slice.Events
+                |> Seq.map deserialize<'a>
+                |> Seq.cast
+                |> AsyncSeq.ofSeq
+            events
+
+        async {
+            let allSlices = readAllSlices store stream version
+
+            let allEvents =
+                allSlices
+                |> AsyncSeq.collect parseEvents
+                |> AsyncSeq.toSeq
+
+            return allEvents
+        }
+
     /// Reads `count` events from a `stream` forwards (e.g. oldest to newest) starting from position `version`.
     let readFromStream (store: IEventStoreConnection) stream version count =
         async {
             let! slice = store.AsyncReadStreamEventsForward stream version count true
 
-            let events: list<'a> =
+            let events: seq<'a> =
                 slice.Events
                 |> Seq.map deserialize<'a>
                 |> Seq.cast
-                |> Seq.toList
 
             let nextEventNumber =
                 if slice.IsEndOfStream
@@ -51,8 +84,8 @@ module EventStore =
         async {
             let serializedEvents =
                 events
-                |> List.map serialize
-                |> List.toArray
+                |> Seq.map serialize
+                |> Seq.toArray
 
             do! store.AsyncAppendToStream stream expectedVersion serializedEvents |> Async.Ignore
         }

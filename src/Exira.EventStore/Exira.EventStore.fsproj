@@ -58,12 +58,12 @@
   <Import Project="..\..\.paket\paket.targets" />
   <ItemGroup>
     <Compile Include="Types.fs" />
+    <None Include="paket.template" />
+    <None Include="paket.references" />
+    <Compile Include="AssemblyInfo.fs" />
     <Compile Include="EventStoreConnectionExtensions.fs" />
     <Compile Include="Serialization.fs" />
     <Compile Include="EventStore.fs" />
-    <Compile Include="AssemblyInfo.fs" />
-    <None Include="paket.references" />
-    <None Include="paket.template" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -76,6 +76,26 @@
       <ItemGroup>
         <Reference Include="EventStore.ClientAPI">
           <HintPath>..\..\packages\EventStore.Client\lib\net40\EventStore.ClientAPI.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="ExtCore">
+          <HintPath>..\..\packages\ExtCore\lib\net40\ExtCore.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
+      <ItemGroup>
+        <Reference Include="ExtCore">
+          <HintPath>..\..\packages\ExtCore\lib\net45\ExtCore.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
