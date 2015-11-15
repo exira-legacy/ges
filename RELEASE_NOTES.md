@@ -1,3 +1,6 @@
+#### 0.4 - October 18 2015
+* NuGet package is now targeting .NET 4.5, 4.5.2 and 4.6
+
 #### 0.3 - October 18 2015
 * Using Seq instead of list since F# 4.0
 * Add readAllFromStream to read using slices per 4096 events (breaking change in EventStore 3.2.0)

@@ -142,8 +142,16 @@ Target "Build" (fun _ ->
     log "##teamcity[progressStart 'Build']"
 
     !! solutionFile
-    |> MSBuildRelease "" "Rebuild"
-    |> ignore
+    |> MSBuildRelease "" "Rebuild" |> ignore
+
+    !! solutionFile
+    |> MSBuild "" "Rebuild" [ "Configuration", "Release45" ] |> ignore
+
+    !! solutionFile
+    |> MSBuild "" "Rebuild" [ "Configuration", "Release452" ] |> ignore
+
+    !! solutionFile
+    |> MSBuild "" "Rebuild" [ "Configuration", "Release46" ] |> ignore
 
     log "##teamcity[progressFinish 'Build']"
 )
@@ -349,8 +357,8 @@ Target "Release" (fun _ ->
 
     // release on github
     createClient (getBuildParamOrDefault "github-user" "") (getBuildParamOrDefault "github-pw" "")
-    |> createDraft gitOwner gitName (sprintf "%s.%s" release.NugetVersion buildNumber) (release.SemVer.PreRelease <> None) release.Notes
-    // TODO: |> uploadFile "PATH_TO_FILE"
+    |> createDraft gitOwner gitName (sprintf "%s.%s" release.NugetVersion buildNumber) (release.SemVer.PreRelease <> None) [""]
+    |> uploadFile (sprintf "bin/%s.%s.%s.nupkg" project release.NugetVersion buildNumber)
     |> releaseDraft
     |> Async.RunSynchronously
 
