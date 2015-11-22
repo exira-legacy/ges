@@ -1,6 +1,3 @@
-#### 0.5 - November 15 2015
-* Connect now takes in a Uri instead of a string
-
 #### 0.4 - November 15 2015
 * NuGet package is now targeting .NET 4.5, 4.5.2 and 4.6
 

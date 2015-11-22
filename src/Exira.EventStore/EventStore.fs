@@ -19,7 +19,7 @@ module EventStore =
     let toStreamId prefix id = sprintf "%s-%O" prefix id |> StreamId
 
     /// Connects asynchronously to a destination.
-    let connect (connectionString: Uri) =
+    let connect (connectionString: string) =
         async {
             let connection = EventStoreConnection.Create(connectionString)
             do! connection.AsyncConnect()
