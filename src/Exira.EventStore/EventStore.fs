@@ -2,9 +2,7 @@
 
 module EventStore =
     open System
-    open System.Net
     open EventStore.ClientAPI
-    open EventStore.ClientAPI.SystemData
     open ExtCore.Collections.AsyncSeqExtensions
 
     open Serialization
@@ -21,7 +19,7 @@ module EventStore =
     let toStreamId prefix id = sprintf "%s-%O" prefix id |> StreamId
 
     /// Connects asynchronously to a destination.
-    let connect (connectionString: string) =
+    let connect (connectionString: Uri) =
         async {
             let connection = EventStoreConnection.Create(connectionString)
             do! connection.AsyncConnect()
