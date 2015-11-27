@@ -1,3 +1,6 @@
+#### 0.5 - November 27 2015
+* Exceptions from readAllFromStream should bubble up
+
 #### 0.4 - November 15 2015
 * NuGet package is now targeting .NET 4.5, 4.5.2 and 4.6
 

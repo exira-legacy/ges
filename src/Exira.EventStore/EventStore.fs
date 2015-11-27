@@ -41,11 +41,11 @@ module EventStore =
             }
 
         let parseEvents (slice: StreamEventsSlice) =
-            let events: AsyncSeq<'a> =
+            let events: seq<'a> =
                 slice.Events
                 |> Seq.map deserialize<'a>
                 |> Seq.cast
-                |> AsyncSeq.ofSeq
+
             events
 
         async {
@@ -53,8 +53,8 @@ module EventStore =
 
             let allEvents =
                 allSlices
-                |> AsyncSeq.collect parseEvents
                 |> AsyncSeq.toSeq
+                |> Seq.collect parseEvents
 
             return allEvents
         }
