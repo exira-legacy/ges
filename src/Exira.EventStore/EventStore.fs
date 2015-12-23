@@ -15,6 +15,13 @@ module EventStore =
         LastPreparePosition: int64
     }
 
+    let private systemPrefix = "$"
+
+    let private toSystemStreamId stream =
+        let (StreamId streamId) = stream
+        if streamId.StartsWith systemPrefix then stream
+        else sprintf "%s%s" systemPrefix streamId |> StreamId
+
     /// Construct a `StreamId` based on a `prefix` and a value.
     let toStreamId prefix id = sprintf "%s-%O" prefix id |> StreamId
 
@@ -91,6 +98,8 @@ module EventStore =
     /// Initialize a new checkpoint `stream` which holds exactly 1 event.
     let initalizeCheckpoint (store: IEventStoreConnection) stream =
         async {
+            let stream = toSystemStreamId stream
+
             let! lastMetaData = store.AsyncGetStreamMetadata stream
 
             if (lastMetaData.MetastreamVersion <> -1) then
@@ -104,6 +113,8 @@ module EventStore =
     /// Store a checkpoint `position` to the checkpoint `stream`.
     let storeCheckpoint (store: IEventStoreConnection) stream (position: Position) =
         async {
+            let stream = toSystemStreamId stream
+
             let checkpoint = LastCheckPoint ({ LastCommitPosition = position.CommitPosition; LastPreparePosition = position.PreparePosition })
 
             do! appendToStream store stream ExpectedVersion.Any [checkpoint]
@@ -112,6 +123,8 @@ module EventStore =
     /// Retrieve a checkpoint position from a checkpoint `stream`.
     let getCheckpoint (store: IEventStoreConnection) stream =
         async {
+            let stream = toSystemStreamId stream
+
             let buildCheckpoint event =
                 event
                 |> deserialize<InternalEvent>

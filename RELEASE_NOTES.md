@@ -1,3 +1,6 @@
+#### 0.6 - December 23 2015
+* Checkpoint streams are always prefixed with $
+
 #### 0.5 - November 27 2015
 * Exceptions from readAllFromStream should bubble up
 
