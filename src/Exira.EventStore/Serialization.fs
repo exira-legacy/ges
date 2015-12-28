@@ -25,6 +25,7 @@ module Serialization =
         let serializedEvent = json.PickleToString event
         let data = Encoding.UTF8.GetBytes serializedEvent
         let eventType = generateEventType event
+        // TODO: Cache the event types to prevent reflection hit
         EventData(Guid.NewGuid(), eventType, isJson = true, data = data, metadata = null)
 
     let deserialize<'a> (event: ResolvedEvent) =
