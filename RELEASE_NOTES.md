@@ -1,3 +1,6 @@
+#### 0.7 - December 28 2015
+* Add generateEventType to build Event Type labels for nested discriminated unions
+
 #### 0.6 - December 23 2015
 * Checkpoint streams are always prefixed with $
 
