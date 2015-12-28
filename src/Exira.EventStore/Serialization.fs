@@ -13,7 +13,7 @@ module Serialization =
     let generateEventType (event: 'a) =
         let rec buildLabel s current =
             let case, o = FSharpValue.GetUnionFields(current, current.GetType())
-            if o.Length > 0 && FSharpType.IsUnion(o.[0].GetType()) then
+            if o.Length > 0 && not(isNull o.[0]) && FSharpType.IsUnion(o.[0].GetType()) then
                 buildLabel (case.Name :: s) o.[0]
             else case.Name :: s
 
