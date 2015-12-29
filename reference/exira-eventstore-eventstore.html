@@ -81,11 +81,11 @@
             appendToStream (...)
           </code>
           <div class="tip" id="1">
-            <strong>Signature:</strong> store:IEventStoreConnection -&gt; stream:StreamId -&gt; expectedVersion:int -&gt; events:seq&lt;&#39;?7233&gt; -&gt; Async&lt;unit&gt;<br />
-                          <strong>Type parameters:</strong> '?7233          </div>
+            <strong>Signature:</strong> store:IEventStoreConnection -&gt; stream:StreamId -&gt; expectedVersion:int -&gt; events:seq&lt;^?7236&gt; -&gt; Async&lt;unit&gt;<br />
+                          <strong>Type parameters:</strong> ^?7236          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L88-88" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L94-94" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -106,7 +106,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L29-29" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L47-47" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -127,7 +127,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L124-124" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L130-130" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -148,7 +148,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L99-99" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L105-105" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -165,11 +165,11 @@
             readAllFromStream store stream version
           </code>
           <div class="tip" id="5">
-            <strong>Signature:</strong> store:IEventStoreConnection -&gt; stream:StreamId -&gt; version:int -&gt; Async&lt;seq&lt;&#39;?7229&gt;&gt;<br />
-                          <strong>Type parameters:</strong> '?7229          </div>
+            <strong>Signature:</strong> store:IEventStoreConnection -&gt; stream:StreamId -&gt; version:int -&gt; Async&lt;seq&lt;^?7232&gt;&gt;<br />
+                          <strong>Type parameters:</strong> ^?7232          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L37-37" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L55-55" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -183,11 +183,11 @@
             readFromStream (...)
           </code>
           <div class="tip" id="6">
-            <strong>Signature:</strong> store:IEventStoreConnection -&gt; stream:StreamId -&gt; version:int -&gt; count:int -&gt; Async&lt;seq&lt;&#39;a&gt; * int * int option&gt;<br />
-                          <strong>Type parameters:</strong> 'a          </div>
+            <strong>Signature:</strong> store:IEventStoreConnection -&gt; stream:StreamId -&gt; version:int -&gt; count:int -&gt; Async&lt;seq&lt;^?7234&gt; * int * int option&gt;<br />
+                          <strong>Type parameters:</strong> ^?7234          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L70-70" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L77-77" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -208,7 +208,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L114-114" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L120-120" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -229,7 +229,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L150-150" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L156-156" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -250,11 +250,11 @@ NOTE: Using Position.Start here will result in missing the first event in the st
             toStreamId prefix id
           </code>
           <div class="tip" id="9">
-            <strong>Signature:</strong> prefix:string -&gt; id:&#39;?7226 -&gt; StreamId<br />
-                          <strong>Type parameters:</strong> '?7226          </div>
+            <strong>Signature:</strong> prefix:string -&gt; id:&#39;?7229 -&gt; StreamId<br />
+                          <strong>Type parameters:</strong> '?7229          </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L26-26" class="github-link">
+            <a href="http://github.com/exira/ges/tree/master/src/Exira.EventStore/EventStore.fs#L44-44" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
