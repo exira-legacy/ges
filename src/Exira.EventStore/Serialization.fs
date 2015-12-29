@@ -20,7 +20,7 @@ module Serialization =
         |> List.rev
         |> String.concat "."
 
-    let inline serialize (event: 'a) =
+    let inline internal serialize (event: 'a) =
         let data =
             event
             |> Json.serialize

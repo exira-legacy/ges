@@ -1,3 +1,6 @@
+#### 0.8 - December 29 2015
+* Switched from FsPickler to Chiron for serialization
+
 #### 0.7 - December 28 2015
 * Add generateEventType to build Event Type labels for nested discriminated unions
 
