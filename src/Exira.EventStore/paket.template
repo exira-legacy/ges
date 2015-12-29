@@ -23,3 +23,4 @@ files
     bin/Release/net45/Exira.EventStore.* ==> lib/net45/
     bin/Release/net452/Exira.EventStore.* ==> lib/net452/
     bin/Release/net46/Exira.EventStore.* ==> lib/net46/
+    bin/Release/net461/Exira.EventStore.* ==> lib/net461/

@@ -153,6 +153,9 @@ Target "Build" (fun _ ->
     !! solutionFile
     |> MSBuild "" "Rebuild" [ "Configuration", "Release46" ] |> ignore
 
+    !! solutionFile
+    |> MSBuild "" "Rebuild" [ "Configuration", "Release461" ] |> ignore
+
     log "##teamcity[progressFinish 'Build']"
 )
 
@@ -376,7 +379,7 @@ Target "All" DoNothing
   ==> "AssemblyInfo"
   ==> "Build"
   ==> "CopyBinaries"
-  ==> "RunTests"
+  //==> "RunTests"
   ==> "GenerateReferenceDocs"
   ==> "GenerateDocs"
   ==> "All"
