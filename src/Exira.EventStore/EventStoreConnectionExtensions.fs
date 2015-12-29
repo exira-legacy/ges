@@ -1,7 +1,7 @@
 ﻿namespace Exira.EventStore
 
 [<AutoOpen>]
-module internal EventStoreConnectionExtensions =
+module EventStoreConnectionExtensions =
     open EventStore.ClientAPI
 
     type private IEventStoreConnection with

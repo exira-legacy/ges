@@ -51,6 +51,10 @@ module EventStore =
             return connection
         }
 
+    let inline private parseEvents (slice: StreamEventsSlice) =
+        slice.Events
+        |> Seq.map deserialize
+
     // Reads all events from a `stream` forwards (e.g. oldest to newest) starting from position `version`.
     let readAllFromStream (store: IEventStoreConnection) stream version =
         let rec readAllSlices (store: IEventStoreConnection) stream version =
@@ -66,16 +70,18 @@ module EventStore =
             }
 
         async {
-            let parseEvents (slice: StreamEventsSlice) =
-                slice.Events
-                |> Seq.map deserialize
-
-            let allSlices = readAllSlices store stream version
-
-            let allEvents =
-                allSlices
+            let allSlices =
+                readAllSlices store stream version
                 |> AsyncSeq.toSeq
-                |> Seq.collect parseEvents
+
+            let allEvents : seq<'a> =
+                allSlices
+                |> Seq.collect (fun slice ->
+                    slice.Events
+                    |> Seq.map deserialize
+                    |> Seq.cast<'a>
+                )
+                // |> Seq.collect parseEvents
 
             return allEvents
         }
@@ -85,9 +91,7 @@ module EventStore =
         async {
             let! slice = store.AsyncReadStreamEventsForward stream version count true
 
-            let events =
-                slice.Events
-                |> Seq.map deserialize
+            let events = parseEvents slice
 
             let nextEventNumber =
                 if slice.IsEndOfStream
@@ -98,7 +102,7 @@ module EventStore =
         }
 
     /// Appends `events` asynchronously to a `stream`.
-    let appendToStream (store: IEventStoreConnection) stream expectedVersion events =
+    let inline appendToStream (store: IEventStoreConnection) stream expectedVersion (events: seq<'a>) =
         async {
             let serializedEvents =
                 events
