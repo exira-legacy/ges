@@ -66,10 +66,9 @@ module EventStore =
             }
 
         async {
-            let parseEvents (slice: StreamEventsSlice) : seq<'a> =
+            let parseEvents (slice: StreamEventsSlice) =
                 slice.Events
                 |> Seq.map deserialize
-                |> Seq.cast
 
             let allSlices = readAllSlices store stream version
 
@@ -82,14 +81,13 @@ module EventStore =
         }
 
     /// Reads `count` events from a `stream` forwards (e.g. oldest to newest) starting from position `version`.
-    let readFromStream (store: IEventStoreConnection) stream version count =
+    let inline readFromStream (store: IEventStoreConnection) stream version count =
         async {
             let! slice = store.AsyncReadStreamEventsForward stream version count true
 
             let events =
                 slice.Events
                 |> Seq.map deserialize
-                |> Seq.cast
 
             let nextEventNumber =
                 if slice.IsEndOfStream
