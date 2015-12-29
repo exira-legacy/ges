@@ -4,16 +4,34 @@ module EventStore =
     open System
     open EventStore.ClientAPI
     open ExtCore.Collections.AsyncSeqExtensions
+    open Chiron
+    open Chiron.Operators
 
     open Serialization
 
     type InternalEvent =
         | LastCheckPoint of LastCheckPointEvent
+    with
+        static member ToJson (e: InternalEvent) =
+            match e with
+            | LastCheckPoint lastCheckPoint -> Json.writeWith Json.serialize "lastCheckPoint" lastCheckPoint
+
+        static member FromJson (_: InternalEvent) = function
+            | Property "lastCheckPoint" x as json -> Json.init (LastCheckPoint x) json
+            | json -> Json.error (sprintf "couldn't deserialise %A to InternalEvent" json) json
 
     and LastCheckPointEvent = {
         LastCommitPosition: int64
         LastPreparePosition: int64
-    }
+    } with
+        static member ToJson (e: LastCheckPointEvent) =
+            Json.write "lastCommitPosition" e.LastCommitPosition
+            *> Json.write "lastPreparePosition" e.LastPreparePosition
+
+        static member FromJson (_: LastCheckPointEvent) =
+            (fun lastCommitPosition lastPreparePosition -> { LastCommitPosition = lastCommitPosition; LastPreparePosition = lastPreparePosition })
+            <!> Json.read "lastCommitPosition"
+            <*> Json.read "lastPreparePosition"
 
     let private systemPrefix = "$"
 
@@ -47,15 +65,12 @@ module EventStore =
                     yield! readAllSlices store stream (version + size)
             }
 
-        let parseEvents (slice: StreamEventsSlice) =
-            let events: seq<'a> =
+        async {
+            let parseEvents (slice: StreamEventsSlice) : seq<'a> =
                 slice.Events
-                |> Seq.map deserialize<'a>
+                |> Seq.map deserialize
                 |> Seq.cast
 
-            events
-
-        async {
             let allSlices = readAllSlices store stream version
 
             let allEvents =
@@ -71,9 +86,9 @@ module EventStore =
         async {
             let! slice = store.AsyncReadStreamEventsForward stream version count true
 
-            let events: seq<'a> =
+            let events =
                 slice.Events
-                |> Seq.map deserialize<'a>
+                |> Seq.map deserialize
                 |> Seq.cast
 
             let nextEventNumber =
@@ -127,7 +142,7 @@ module EventStore =
 
             let buildCheckpoint event =
                 event
-                |> deserialize<InternalEvent>
+                |> deserialize
                 |> function
                     | InternalEvent.LastCheckPoint e -> Nullable(Position(e.LastCommitPosition, e.LastPreparePosition))
 

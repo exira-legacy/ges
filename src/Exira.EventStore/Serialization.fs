@@ -5,12 +5,11 @@ module Serialization =
     open System.Text
     open EventStore.ClientAPI
     open Microsoft.FSharp.Reflection
-    open Nessos.FsPickler.Json
-
-    let private json = FsPickler.CreateJsonSerializer(indent = false)
+    open Chiron
 
     // Credits to @pezi_pink
     let generateEventType (event: 'a) =
+        // TODO: Cache the event types to prevent reflection hit
         let rec buildLabel s current =
             let case, o = FSharpValue.GetUnionFields(current, current.GetType())
             if o.Length > 0 && not(isNull o.[0]) && FSharpType.IsUnion(o.[0].GetType()) then
@@ -21,14 +20,17 @@ module Serialization =
         |> List.rev
         |> String.concat "."
 
-    let internal serialize (event: 'a) =
-        let serializedEvent = json.PickleToString event
-        let data = Encoding.UTF8.GetBytes serializedEvent
+    let inline internal serialize (event: 'a) =
+        let data =
+            event
+            |> Json.serialize
+            |> Json.format
+            |> Encoding.UTF8.GetBytes
+
         let eventType = generateEventType event
-        // TODO: Cache the event types to prevent reflection hit
         EventData(Guid.NewGuid(), eventType, isJson = true, data = data, metadata = null)
 
-    let deserialize<'a> (event: ResolvedEvent) =
-        let serializedString = Encoding.UTF8.GetString event.Event.Data
-        let event : 'a = json.UnPickleOfString<'a>(pickle = serializedString)
-        event
+    let inline deserialize (event: ResolvedEvent) =
+        Encoding.UTF8.GetString event.Event.Data
+        |> Json.parse
+        |> Json.deserialize

@@ -1,4 +1,4 @@
 FSharp.Core
 EventStore.Client
-FsPickler.Json
+Chiron
 ExtCore
