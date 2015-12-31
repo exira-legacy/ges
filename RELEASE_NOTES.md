@@ -1,6 +1,6 @@
 #### 0.8 - December 29 2015
 * Switched from FsPickler to Chiron for serialization
-* NuGet package is now targeting .NET 4.6.1
+* NuGet package is now targeting .NET 4.5.1 and 4.6.1
 
 #### 0.7 - December 28 2015
 * Add generateEventType to build Event Type labels for nested discriminated unions

@@ -21,6 +21,7 @@ description
     Exira.EventStore is an F# implementation for EventStore (https://geteventstore.com/)
 files
     bin/Release/net45/Exira.EventStore.* ==> lib/net45/
+    bin/Release/net451/Exira.EventStore.* ==> lib/net451/
     bin/Release/net452/Exira.EventStore.* ==> lib/net452/
     bin/Release/net46/Exira.EventStore.* ==> lib/net46/
     bin/Release/net461/Exira.EventStore.* ==> lib/net461/
